@@ -1,0 +1,25 @@
+# compiled Python
+__pycache__/
+
+# MacOS Desktop Services
+.DS_Store
+
+# virtual envs
+venv/
+.venv/
+
+# ignore environment files
+.env/
+*.env*
+
+# except for .env.example
+!*.env.example
+
+# temporary Jupyter IPython notebook files
+.ipynb_checkpoints/
+
+# temporary cache directories from hypothesis and pytest libraries
+.hypothesis/
+.pytest_cache/
+
+*.egg-info/
