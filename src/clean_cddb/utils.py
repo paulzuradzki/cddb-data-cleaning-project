@@ -1,4 +1,5 @@
-from typing import Any, Dict, List, Hashable
+import typing
+from typing import Any, Dict, Hashable, List
 
 import pandas as pd
 import pandera as pa
@@ -42,13 +43,14 @@ def get_check_func_descriptions(
     return failure_cases_df_with_source
 
 
+@typing.no_type_check
 def display_failure_cases_summary(failure_cases_df: pd.DataFrame) -> None:
     failure_cases_summary: pd.DataFrame = (
         failure_cases_df.groupby(
             ["column", "check", "check_source_code"], as_index=False
         )
         .size()
-        .sort_values(by=["column", "check"])  # type: ignore
+        .sort_values(by=["column", "check"])
         .rename(columns={"size": "counts"})
         .loc[:, ["column", "check", "counts", "check_source_code"]]
     )
