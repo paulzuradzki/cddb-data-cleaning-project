@@ -20,7 +20,9 @@ from clean_cddb.cleaning_transforms import (
         ("   Led Zeppelin   ", "Led Zeppelin"),
     ],
 )
-def test_clean_value_standardize_various_artist(input_value, expected_output):
+def test_clean_value_standardize_various_artist(
+    input_value: str, expected_output: str
+) -> None:
     assert clean_value_standardize_various_artist(input_value) == expected_output
 
 
@@ -36,5 +38,7 @@ def test_clean_value_standardize_various_artist(input_value, expected_output):
         ("MÃ¶gel", "Mögel"),
     ],
 )
-def test_clean_value_try_to_fix_encoding_errors(input_value, expected_output):
+def test_clean_value_try_to_fix_encoding_errors(
+    input_value: str, expected_output: str
+) -> None:
     assert clean_value_try_to_fix_encoding_errors(input_value) == expected_output
