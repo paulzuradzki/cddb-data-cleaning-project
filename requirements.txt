@@ -2,3 +2,4 @@ ftfy
 pandas
 pandera
 seaborn
+tabulate
