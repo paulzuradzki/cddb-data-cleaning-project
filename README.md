@@ -63,8 +63,20 @@ $ source /venv/bin/activate
 (venv) $ python -m pip install git+https://github.com/paulzuradzki/cs513-data-cleaning-project.git
 ```
 
-#### Testing
+#### Dev Tools
 
+`./run_tests.sh`
 ```bash
+#!/bin/bash
+
+# Usage: bash ./run_tests.sh
+
+# Testing
 python -m pytest
+
+# Linting
+ruff check .
+
+# Type-checking
+MYPYPATH=src mypy . --explicit-package-bases
 ```
