@@ -31,7 +31,7 @@ jobs:
 
       - name: Type-check with mypy
         run: |
-          MYPYPATH=src mypy . --explicit-package-bases --check-untyped-defs --strict
+          MYPYPATH=src mypy . --explicit-package-bases --strict --exclude venv
 
       - name: Lint with ruff
         run: |
