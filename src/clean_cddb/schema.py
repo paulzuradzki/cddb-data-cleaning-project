@@ -33,7 +33,6 @@ import pandera as pa
 
 from . import checks
 
-
 schema = pa.DataFrameSchema(
     {
         "artist": pa.Column(
