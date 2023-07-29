@@ -3,14 +3,14 @@ import re
 
 
 def check_col_has_valid_characters(x: Any) -> bool:
-    """Check for invalid symbols."""
+    """Check for *possibly* invalid symbols."""
 
     # consider NaNs and floats to be invalid
     if not isinstance(x, str):
         return False
 
     invalid_symbols = set(
-        "-.\^z¤¦©¬®¯°±²³´µ¶¸¹º»¼½¾¿ÀÂÃÄÅÆÇÈÌÕÖÜàâäåçèéïð÷øùû˜ѼҸ€中俊劇四団季雅�"
+        "\^z¤¦©¬®¯°±²³´µ¶¸¹º»¼½¾¿ÀÂÃÄÅÆÇÈÌÕÖÜàâäåçèéïð÷øùû˜ѼҸ€中俊劇四団季雅�"
     )
     for char in x:
         if char in invalid_symbols:
@@ -63,6 +63,8 @@ def check_category_is_valid(x: Any) -> bool:
         "reggae",
         "rock",
         "soundtrack",
+        "N/A",
+        # "REJECT_ROW",
     ]:
         return True
     else:
@@ -106,6 +108,7 @@ def check_year_is_numeric(x: Any) -> bool:
 
 
 def check_track_has_numeric_prefix(x: Any) -> bool:
+    """Check for tracks *possibly* using numeric prefix."""
     for keyword in ["disk", "track", "title", "01"]:
         if keyword in x.lower():
             return False
