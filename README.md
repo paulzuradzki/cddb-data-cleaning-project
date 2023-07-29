@@ -4,6 +4,8 @@
 
 This is a package for cleaning the CDDB (Compact Disc Database) collection of music albums and tracks data.
 
+![Tests](https://github.com/github/docs/actions/workflows/test.yml/badge.svg)
+
 ## Usage
 
 See `notebooks/cleaning_cddb.ipynb` for annotated examples.
