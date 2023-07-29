@@ -1,12 +1,6 @@
 name: Python package
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push]
 
 jobs:
   build:
@@ -23,10 +17,10 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      # - uses: actions/cache@v2
-      #   with:
-      #     path: ${{ env.pythonLocation }}
-      #     key: ${{ env.pythonLocation }}-${{ hashFiles('setup.cfg') }}-${{ hashFiles('requirements_dev.txt') }}
+      - uses: actions/cache@v2
+        with:
+          path: ${{ env.pythonLocation }}
+          key: ${{ env.pythonLocation }}-${{ hashFiles('setup.cfg') }}-${{ hashFiles('requirements_dev.txt') }}-${{ hashFiles('requirements.txt') }}
 
       - name: Install dependencies
         run: |
