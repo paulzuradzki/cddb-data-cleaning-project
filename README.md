@@ -71,18 +71,6 @@ Install developer dependencies.
 
 Run tests script manually like so.
 
-`./run_tests.sh`
-```bash
-#!/bin/bash
-
-# Usage: bash ./run_tests.sh
-
-# Testing
-python -m pytest
-
-# Linting
-ruff check .
-
-# Type-checking
-MYPYPATH=src mypy . --explicit-package-bases
+```
+$ bash ./run_tests.sh
 ```

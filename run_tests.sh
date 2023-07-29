@@ -12,7 +12,7 @@ ruff check .
 
 # Type-checking
 echo "Type-checking..."
-mypy src --explicit-package-bases --check-untyped-defs --strict
+MYPYPATH=src mypy . --explicit-package-bases --strict --exclude venv
 mypy tests --explicit-package-bases --check-untyped-defs --strict --ignore-missing-imports
 
 # Package linting
