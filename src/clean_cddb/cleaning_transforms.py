@@ -31,10 +31,6 @@ def clean_df_standardize_various_artists(df: pd.DataFrame) -> pd.DataFrame:
     )
 
 
-################################################################
-################################################################
-
-
 def clean_value_try_to_fix_encoding_errors(x: Any) -> str:
     if not checks.check_col_has_valid_characters(str(x)):
         text_to_try: str = ftfy.fix_text(str(x))
@@ -50,42 +46,40 @@ def clean_df_try_to_fix_encoding_errors(
     return df
 
 
-################################################################
-################################################################
-
-
-def clean_row_invalid_symbols(row):
+def clean_row_invalid_symbols(row):  # type: ignore
     if not checks.check_col_has_valid_characters(
-        row["artist"]
-    ) or not checks.check_artist_is_valid(row["artist"]):
-        row = ["REJECT_ROW - invalid artist" for _cell in row]
+        row.get("artist")
+    ) or not checks.check_artist_is_valid(row.get("artist")):
+        row = pd.Series(["REJECT_ROW - invalid artist"] * len(row), index=row.index)
     return row
 
 
-def clean_df_invalid_symbols(df):
-    return df.apply(clean_row_invalid_symbols, axis=1)
+def clean_df_invalid_symbols(df: pd.DataFrame) -> pd.DataFrame:
+    return df.apply(clean_row_invalid_symbols, axis=1)  # type: ignore
 
 
 def clean_value_invalid_categories(value: Any) -> str:
     if not checks.check_category_is_valid(value):
         return "N/A"
-    return value
+    return str(value)
 
 
-def clean_df_invalid_categories(df):
+def clean_df_invalid_categories(df: pd.DataFrame) -> pd.DataFrame:
     return df.assign(
         category=lambda _df: _df["category"].apply(clean_value_invalid_categories)
     )
 
 
-def clean_df_id_zero_padding(df):
+def clean_df_id_zero_padding(df: pd.DataFrame) -> pd.DataFrame:
     return df.assign(id=lambda _df: _df["id"].apply(lambda s: str(s).zfill(6)))
 
 
-def clean_row_genre_invalid(row):
-    genre_str = str(row["genre"])
+def clean_row_genre_invalid(row):  # type: ignore
+    genre_str = str(row.get("genre"))
     if not checks.check_genre_is_valid(genre_str):
-        row = ["REJECT_ROW - invalid genre" for _cell in row]
+        row = pd.Series(
+            ["REJECT_ROW - invalid genre" for _cell in row], index=row.index
+        )
     else:
         row["genre"] = (
             genre_str.replace("Data", "N/A")
@@ -95,35 +89,38 @@ def clean_row_genre_invalid(row):
     return row
 
 
-def clean_df_genre_invalid(df):
-    return df.apply(clean_row_genre_invalid, axis=1)
+def clean_df_genre_invalid(df: pd.DataFrame) -> pd.DataFrame:
+    return df.apply(clean_row_genre_invalid, axis=1)  # type: ignore
 
 
-def clean_row_tracks_invalid_symbols(row):
+def clean_row_tracks_invalid_symbols(row):  # type: ignore
     invalid_symbols = set("Ã¤Â")
     for s in invalid_symbols:
         if s in row["tracks"]:
-            row = ["REJECT_ROW - invalid symbol in tracks" for _cell in row]
+            row = pd.Series(
+                ["REJECT_ROW - invalid symbol in tracks" for _cell in row],
+                index=row.index,
+            )
         return row
     return row
 
 
-def clean_df_tracks_invalid_symbols(df):
-    return df.apply(clean_row_tracks_invalid_symbols, axis=1)
+def clean_df_tracks_invalid_symbols(df: pd.DataFrame) -> pd.DataFrame:
+    return df.apply(clean_row_tracks_invalid_symbols, axis=1)  # type: ignore
 
 
-def clean_value_year(value):
+def clean_value_year(value: Any) -> Any:
     if checks.check_year_is_numeric(value) and checks.check_year_range_is_valid(value):
         return value
     else:
         return pd.NA
 
 
-def clean_df_year(df):
+def clean_df_year(df: pd.DataFrame) -> pd.DataFrame:
     return df.assign(
         year=lambda _df: _df["year"].apply(clean_value_year).astype("Int32")
     )
 
 
-def clean_df_title(df):
+def clean_df_title(df: pd.DataFrame) -> pd.DataFrame:
     return df.assign(title=lambda _df: _df["title"].fillna("N/A"))
