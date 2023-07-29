@@ -5,5 +5,6 @@ build-backend = "setuptools.build_meta"
 [tool.ruff]
 src = ["src"]
 
-[mypy]
+[tool.mypy]
+mypy_path = ["src"]
 ignore_missing_imports = "True"
