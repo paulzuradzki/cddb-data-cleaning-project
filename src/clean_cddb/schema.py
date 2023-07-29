@@ -21,8 +21,8 @@ Notes
 import inspect
 
 import pandera as pa
+
 from .checks import *
-from typing import Dict
 
 schema = pa.DataFrameSchema(
     {
@@ -35,7 +35,14 @@ schema = pa.DataFrameSchema(
                     element_wise=True,
                     name=check_artist_is_valid.__doc__,
                     description=inspect.getsource(check_artist_is_valid),
-                )
+                ),
+                pa.Check(
+                    check_col_has_valid_characters,
+                    element_wise=True,
+                    name=check_col_has_valid_characters.__doc__,
+                    ignore_na=False,
+                    description=inspect.getsource(check_col_has_valid_characters),
+                    ),
             ],
         ),
         "category": pa.Column(
@@ -118,26 +125,3 @@ schema = pa.DataFrameSchema(
         ),         
     }
 )
-
-def get_check_name_descriptions(schema: pa.DataFrameSchema) -> Dict[str, str]:
-    """Get the descriptions for each check function across all columns in the schema."""
-    
-    check_name_descriptions:Dict = {}
-    for _column_name, column_obj in schema.columns.items():
-        for check in column_obj.checks:        
-            check_name_descriptions[check.name] = check.description
-    return check_name_descriptions
-
-def display_check_name_and_descriptions(check_name_descriptions):
-    """Utility function to show the check names and descriptions in a prettier format.
-    
-    The check descriptions contain the source code of the check function.
-    """
-    
-    if not check_name_descriptions:
-        check_name_descriptions = get_check_name_descriptions(schema)
-    
-    for _check_name, description in check_name_descriptions.items():
-        print(description)
-        print("="*50)
-        print()
