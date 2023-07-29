@@ -1,7 +1,8 @@
+from typing import Any
 import re
 
 
-def check_col_has_valid_characters(x):
+def check_col_has_valid_characters(x: Any) -> bool:
     """Check for invalid symbols."""
 
     # consider NaNs and floats to be invalid
@@ -28,7 +29,7 @@ def check_col_has_valid_characters(x):
     return True
 
 
-def check_artist_is_valid(x):
+def check_artist_is_valid(x: Any) -> bool:
     """Check for invalid artist values."""
 
     various_artist_pattern = r"\b(various|various artist(s)?|var)\b"
@@ -48,7 +49,7 @@ def check_artist_is_valid(x):
     return True
 
 
-def check_category_is_valid(x):
+def check_category_is_valid(x: Any) -> bool:
     """Check for invalid categories."""
 
     if x in [
@@ -68,7 +69,7 @@ def check_category_is_valid(x):
         return False
 
 
-def check_genre_is_valid(x):
+def check_genre_is_valid(x: Any) -> bool:
     """Check for invalid genres."""
     try:
         if "--" in x:
@@ -79,7 +80,7 @@ def check_genre_is_valid(x):
         return True
 
 
-def check_year_range_is_valid(x):
+def check_year_range_is_valid(x: Any) -> bool:
     """Check that year is between 1950 and 2030."""
 
     try:
@@ -93,7 +94,7 @@ def check_year_range_is_valid(x):
         return False
 
 
-def check_year_is_numeric(x):
+def check_year_is_numeric(x: Any) -> bool:
     """Check if year is numeric."""
 
     try:
@@ -104,7 +105,7 @@ def check_year_is_numeric(x):
     return True
 
 
-def check_track_has_numeric_prefix(x):
+def check_track_has_numeric_prefix(x: Any) -> bool:
     for keyword in ["disk", "track", "title", "01"]:
         if keyword in x.lower():
             return False
