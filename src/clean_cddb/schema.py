@@ -97,7 +97,7 @@ schema = pa.DataFrameSchema(
             ],
         ),
         "year": pa.Column(
-            float,
+            "Int32",
             nullable=True,
             checks=[
                 # Implementing our own range check due to varying types
@@ -117,22 +117,22 @@ schema = pa.DataFrameSchema(
                 ),
             ],
         ),
-        "tracks": pa.Column(
-            object,
-            nullable=False,
-            checks=[
-                pa.Check(
-                    checks.check_track_has_numeric_prefix,
-                    element_wise=True,
-                    name="Check for tracks possibly using numeric prefix",
-                    description=inspect.getsource(
-                        checks.check_track_has_numeric_prefix
-                    ),
-                )
-            ],
-        ),
+        # "tracks": pa.Column(
+        #     object,
+        #     nullable=False,
+        #     checks=[
+        #         pa.Check(
+        #             checks.check_track_has_numeric_prefix,
+        #             element_wise=True,
+        #             name=checks.check_year_is_numeric.__doc__,
+        #             description=inspect.getsource(
+        #                 checks.check_track_has_numeric_prefix
+        #             ),
+        #         )
+        #     ],
+        # ),
         "id": pa.Column(
-            int,
+            object,
             nullable=False,
             checks=[
                 pa.Check(
