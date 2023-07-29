@@ -12,4 +12,4 @@ ruff check .
 
 # Type-checking
 echo "Type-checking..."
-MYPYPATH=src mypy . --explicit-package-bases
+MYPYPATH=src mypy . --explicit-package-bases --check-untyped-defs --strict
