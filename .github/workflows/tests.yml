@@ -27,7 +27,7 @@ jobs:
           pip install .
           if [ -f requirements_dev.txt ]; then pip install -r requirements_dev.txt; fi
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          mypy --install-types --non-interactive
+          mypy src --install-types --non-interactive
 
       - name: Type-check with mypy
         run: |
