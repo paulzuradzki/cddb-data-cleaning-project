@@ -1,8 +1,6 @@
-name: Python package
+name: Test clean_cddb
 
-on:
-  - push
-  - pull_request
+on: [push]
 
 jobs:
   build:
