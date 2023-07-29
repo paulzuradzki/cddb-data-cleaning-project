@@ -6,9 +6,10 @@ and returns a dataframe after applying a cleaning procedure.
 """
 
 import re
+import typing
+from typing import Any
 
 import ftfy
-from typing import Any
 import pandas as pd
 
 from . import checks
@@ -46,7 +47,7 @@ def clean_df_try_to_fix_encoding_errors(
     return df
 
 
-def clean_row_invalid_symbols(row):  # type: ignore
+def clean_row_invalid_symbols(row: Any) -> Any:
     if not checks.check_col_has_valid_characters(
         row.get("artist")
     ) or not checks.check_artist_is_valid(row.get("artist")):
@@ -54,8 +55,9 @@ def clean_row_invalid_symbols(row):  # type: ignore
     return row
 
 
+@typing.no_type_check
 def clean_df_invalid_symbols(df: pd.DataFrame) -> pd.DataFrame:
-    return df.apply(clean_row_invalid_symbols, axis=1)  # type: ignore
+    return df.apply(clean_row_invalid_symbols, axis=1)
 
 
 def clean_value_invalid_categories(value: Any) -> str:
@@ -74,7 +76,7 @@ def clean_df_id_zero_padding(df: pd.DataFrame) -> pd.DataFrame:
     return df.assign(id=lambda _df: _df["id"].apply(lambda s: str(s).zfill(6)))
 
 
-def clean_row_genre_invalid(row):  # type: ignore
+def clean_row_genre_invalid(row: Any) -> Any:
     genre_str = str(row.get("genre"))
     if not checks.check_genre_is_valid(genre_str):
         row = pd.Series(
@@ -89,11 +91,12 @@ def clean_row_genre_invalid(row):  # type: ignore
     return row
 
 
+@typing.no_type_check
 def clean_df_genre_invalid(df: pd.DataFrame) -> pd.DataFrame:
-    return df.apply(clean_row_genre_invalid, axis=1)  # type: ignore
+    return df.apply(clean_row_genre_invalid, axis=1)
 
 
-def clean_row_tracks_invalid_symbols(row):  # type: ignore
+def clean_row_tracks_invalid_symbols(row: Any) -> Any:
     invalid_symbols = set("Ã¤Â")
     for s in invalid_symbols:
         if s in row["tracks"]:
@@ -105,8 +108,9 @@ def clean_row_tracks_invalid_symbols(row):  # type: ignore
     return row
 
 
+@typing.no_type_check
 def clean_df_tracks_invalid_symbols(df: pd.DataFrame) -> pd.DataFrame:
-    return df.apply(clean_row_tracks_invalid_symbols, axis=1)  # type: ignore
+    return df.apply(clean_row_tracks_invalid_symbols, axis=1)
 
 
 def clean_value_year(value: Any) -> Any:
