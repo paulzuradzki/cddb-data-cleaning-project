@@ -1,28 +1,28 @@
 """schema.py
 
 Pandera schema for CDDB dataset.
-* A "Pandera Schema" refers to a set of validation rules 
-  and data quality checks defined for a pandas DataFrame. 
-* It allows you to specify the expected data types, formats, constraints, 
+* A "Pandera Schema" refers to a set of validation rules
+  and data quality checks defined for a pandas DataFrame.
+* It allows you to specify the expected data types, formats, constraints,
   and other conditions that the data in the DataFrame should adhere to.
-* Using Pandera, you can create a schema for a DataFrame, 
-  apply the schema to the data, and check whether the data meets the defined 
+* Using Pandera, you can create a schema for a DataFrame,
+  apply the schema to the data, and check whether the data meets the defined
   validation rules.
 
 Notes
-* `element_wise=True` applies the check to each element 
-   as opposed to the entire column/array. 
+* `element_wise=True` applies the check to each element
+   as opposed to the entire column/array.
     * Column-level checks are for checking things like "is the mean of the this
       column within X range".
-    * Element-wise checks are for checking things like "is a given row value 
+    * Element-wise checks are for checking things like "is a given row value
       within a valid range".
-* we use `inspect.getsource(Callable)` to get the source code for a check 
+* we use `inspect.getsource(Callable)` to get the source code for a check
   function so we can include it later in reporting
 * `checks.check_*()` functions
     * These are data quality checks
     * Returning false for a given value indicates a failure case.
     * One check may be used across multiple columns.
-    * Pandera has its own built-in checks for common operations 
+    * Pandera has its own built-in checks for common operations
      (range check, check if value is member of valid set, etc.)
     * These are user-defined checks.
 """

@@ -1,5 +1,8 @@
 black
 mypy
+pre-commit
+pyroma
 pytest
 ruff
-.
+types-tabulate
+--editable .

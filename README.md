@@ -44,11 +44,6 @@ $ source /venv/bin/activate
 (venv) $ python -m pip install --upgrade pip
 (venv) $ python -m pip install -r requirements.txt
 (venv) $ python -m pip install .
-
-# use the flag `-e` (`--editable` mode) if you plan to edit the package source inside src/
-# this creates a symbolic link between your virtual environment site-packages and your local directory
-# that way, you don't have to re-install as you edit
-(venv) $ python -m pip install -e .
 ```
 
 #### Option 2: Install with pip from GitHub
@@ -64,6 +59,17 @@ $ source /venv/bin/activate
 ```
 
 #### Dev Tools
+
+Install developer dependencies.
+```bash
+# use the flag `-e` (`--editable` mode) if you plan to edit the package source inside src/
+    # this creates a symbolic link between your virtual environment site-packages and your local directory
+    # that way, you don't have to re-install as you edit
+(venv) $ python -m pip install -e .
+(venv) $ python -m pip install -r requirements_dev.txt
+```
+
+Run tests script manually like so.
 
 `./run_tests.sh`
 ```bash

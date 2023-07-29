@@ -3,3 +3,4 @@ pandas
 pandera
 seaborn
 tabulate
+types-tabulate
