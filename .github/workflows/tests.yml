@@ -29,6 +29,12 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           mypy src --install-types --non-interactive
 
+      # TODO: add tox and tox-gh-actions
+
+      - name: Test with pytest
+        run: |
+          pytest
+
       - name: Type-check with mypy
         run: |
           mypy src --strict
@@ -40,9 +46,3 @@ jobs:
           ruff --format=github --select=E9,F63,F7,F82 --target-version=py38 .
           # default set of ruff rules with GitHub Annotations
           ruff --format=github --target-version=py38 .
-
-      # TODO: add tox and tox-gh-actions
-
-      - name: Test with pytest
-        run: |
-          pytest
