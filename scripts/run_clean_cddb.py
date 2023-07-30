@@ -20,7 +20,7 @@ from clean_cddb.utils import (
 )
 
 
-def df_to_var(df, var_name):
+def df_to_var(df: pd.DataFrame, var_name: str) -> pd.DataFrame:
     globals()[var_name] = df
     return df
 
@@ -138,9 +138,8 @@ evaluation_summary_df = before_cleaning_failure_cases_summary.merge(
 logging.info("Creating detailed row-level comps of before-vs-after cleaning...")
 comps_df: pd.DataFrame = (
     source_df.compare(
-        clean_df_before_drops,
-        result_names=("before_cleaning", "after_cleaning")
-        # type: ignore [arg-type]
+        clean_df_before_drops,  # type: ignore [arg-type]
+        result_names=("before_cleaning", "after_cleaning"),
     )
     .astype("object")  # type: ignore [arg-type]
     .fillna("")
@@ -191,6 +190,7 @@ output_path_checks_summary_table = (
 )
 with open(output_path_checks_summary_table, "w") as f:
     f.write(before_cleaning_failure_cases_summary_table)
+    f.write("\n")
     logging.info(f"Wrote: {output_path_checks_summary_table}")
 
 df_names = str(list(dfs.keys()))
