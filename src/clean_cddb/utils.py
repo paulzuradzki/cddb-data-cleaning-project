@@ -1,5 +1,6 @@
+import logging
 import typing
-from typing import Any, Dict, Hashable, List
+from typing import Any, Dict, Hashable, List, Union
 
 import pandas as pd
 import pandera as pa
@@ -64,3 +65,35 @@ def get_failure_cases_summary_as_formatted_table(
         report_items, headers="keys", tablefmt="grid"
     )
     return formatted_table
+
+
+def log_df_change(
+    after_df: pd.DataFrame, before_df: pd.DataFrame, operation_label: str
+) -> pd.DataFrame:
+    comps_df: pd.DataFrame = before_df.compare(
+        after_df, result_names=("before", "after")
+    )
+
+    comps_df_sample_markdown: Union[str, None] = None
+    if not comps_df.empty:
+        comps_df_sample_markdown: str = (
+            comps_df.sample(5, random_state=0).fillna("").to_markdown()
+        )
+
+    n_rows, _ = comps_df.shape
+
+    log_message = "Cleaning operation"
+    log_message += f"\noperation_label: {operation_label}"
+    log_message += f"\ncleaning operation_label: {operation_label}"
+    log_message += f"\nNumber of rows affected: {n_rows}"
+    log_message += (
+        f"\nColumns affected: {set([col for col, _ in comps_df.columns.tolist()])}"
+    )
+    log_message += f"\nExamples:\n{comps_df_sample_markdown}\n"
+    log_message += f"{'='*100}\n"
+    log_message += f"{'='*100}\n"
+
+    logging.info(log_message)
+
+    # Return the same dataframe
+    return after_df

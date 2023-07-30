@@ -39,6 +39,7 @@ def test_clean_value_standardize_various_artist(
         ("LeÃ¦ther Strip", "Leæther Strip"),
         ("BÃ¼rger Lars Dietrich", "Bürger Lars Dietrich"),
         ("MÃ¶gel", "Mögel"),
+        ("BernadÃ¨te BidÃ\xa0ude", "Bernadète Bidàude"),
     ],
 )
 def test_clean_value_try_to_fix_encoding_errors(
