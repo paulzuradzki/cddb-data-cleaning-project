@@ -136,11 +136,13 @@ evaluation_summary_df = before_cleaning_failure_cases_summary.merge(
 ).fillna("")
 
 logging.info("Creating detailed row-level comps of before-vs-after cleaning...")
-comps_df = (
+comps_df: pd.DataFrame = (
     source_df.compare(
-        clean_df_before_drops, result_names=("before_cleaning", "after_cleaning")
+        clean_df_before_drops,
+        result_names=("before_cleaning", "after_cleaning")
+        # type: ignore [arg-type]
     )
-    .astype("object")
+    .astype("object")  # type: ignore [arg-type]
     .fillna("")
 )
 
