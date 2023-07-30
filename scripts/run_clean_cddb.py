@@ -157,6 +157,41 @@ comps_df_formatted = (
     .replace("^(  =>  )$", "", regex=True)
 )
 
+################################
+# Transform to track-level data
+################################
+
+track_level_df = (
+    # Start with original dataframe
+    clean_df
+    # Split 'tracks' on pipe into an array; we can "explode" it later
+    .pipe(lambda _df: _df.assign(tracks=_df["tracks"].str.split("|")))
+    # "explode"/expand from "tracks" array in to 1 observation per track
+    # perform a self-join to CD data set; the CD-level data will repeat for each track
+    .pipe(
+        lambda _df: _df.merge(
+            _df["tracks"].explode(), left_index=True, right_index=True
+        )
+    )
+    .pipe(df_to_var, "df_after_explode")
+    # Make new 'tracks' field; strip ' ' empty space track names to '' empty string
+    .pipe(lambda _df: _df.assign(tracks=_df["tracks_y"].str.strip()))
+    # Don't need these fields anymore
+    .drop(columns=["tracks_x", "tracks_y"])
+    # Filter out empty string track names
+    .query("tracks!=''")
+    .pipe(df_to_var, "df_after_empty_track_name_filter")
+    .reset_index(drop=True)
+    .loc[:, ["id", "tracks"]]
+    .reset_index()
+    .rename(
+        columns={
+            "id": "album_row_id",
+            "index": "track_id",
+            "tracks": "track_name",
+        }
+    )
+)
 
 #######################
 # Export data
@@ -172,6 +207,7 @@ dfs = {
     "evaluation_summary_df": evaluation_summary_df,
     "comps_df": comps_df,
     "comps_df_formatted": comps_df_formatted,
+    "track_level_df": track_level_df,
 }
 
 Path("./data/output/csv").mkdir(exist_ok=True)
