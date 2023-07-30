@@ -71,7 +71,7 @@ schema = pa.DataFrameSchema(
         ),
         "genre": pa.Column(
             object,
-            nullable=True,
+            nullable=False,
             checks=[
                 pa.Check(
                     checks.check_genre_is_valid,
