@@ -30,6 +30,13 @@ except pa.errors.SchemaErrors as err:
 
 With `failure_cases_df`, we can perform analysis or query the failure cases. This is useful for high-level summaries (e.g., "how many observations fail a given validation check?") or detailed examples (e.g., "show example failure cases where the year was out of range").
 
+<br>
+
+End-to-end script
+```python
+(venv) $ python scripts/run_clean_cddb.py
+```
+
 ## Setup
 
 #### Option 1: Build from source

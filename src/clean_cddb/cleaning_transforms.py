@@ -129,5 +129,6 @@ def clean_df_year(df: pd.DataFrame) -> pd.DataFrame:
 def clean_df_title(df: pd.DataFrame) -> pd.DataFrame:
     return df.assign(title=lambda _df: _df["title"].fillna("N/A"))
 
+
 def clean_df_genre(df: pd.DataFrame) -> pd.DataFrame:
-    return df.assign(genre=lambda _df: _df["genre"].fillna(_df['category']))
+    return df.assign(genre=lambda _df: _df["genre"].fillna(_df["category"]))

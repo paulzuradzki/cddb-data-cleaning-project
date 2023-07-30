@@ -44,7 +44,9 @@ def get_check_func_descriptions(
 
 
 @typing.no_type_check
-def display_failure_cases_summary(failure_cases_df: pd.DataFrame) -> None:
+def get_failure_cases_summary_as_formatted_table(
+    failure_cases_df: pd.DataFrame,
+) -> None:
     failure_cases_summary: pd.DataFrame = (
         failure_cases_df.groupby(
             ["column", "check", "check_source_code"], as_index=False
@@ -61,4 +63,4 @@ def display_failure_cases_summary(failure_cases_df: pd.DataFrame) -> None:
     formatted_table: str = tabulate.tabulate(
         report_items, headers="keys", tablefmt="grid"
     )
-    print(formatted_table)
+    return formatted_table
