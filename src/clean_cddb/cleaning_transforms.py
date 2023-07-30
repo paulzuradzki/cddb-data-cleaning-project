@@ -10,6 +10,7 @@ import typing
 from typing import Any
 
 import ftfy
+import numpy as np
 import pandas as pd
 
 from . import checks
@@ -43,8 +44,9 @@ def clean_value_try_to_fix_encoding_errors(x: Any) -> str:
 def clean_df_try_to_fix_encoding_errors(
     df: pd.DataFrame, column_name: str
 ) -> pd.DataFrame:
-    df[column_name] = df[column_name].apply(clean_value_try_to_fix_encoding_errors)
-    return df
+    new_df = df.copy()
+    new_df[column_name] = df[column_name].apply(clean_value_try_to_fix_encoding_errors)
+    return new_df
 
 
 def clean_row_invalid_symbols(row: Any) -> Any:
@@ -96,33 +98,17 @@ def clean_df_genre_invalid(df: pd.DataFrame) -> pd.DataFrame:
     return df.apply(clean_row_genre_invalid, axis=1)
 
 
-def clean_row_tracks_invalid_symbols(row: Any) -> Any:
-    invalid_symbols = set("Ã¤Â")
-    for s in invalid_symbols:
-        if s in row["tracks"]:
-            row = pd.Series(
-                ["REJECT_ROW - invalid symbol in tracks" for _cell in row],
-                index=row.index,
-            )
-        return row
-    return row
-
-
-@typing.no_type_check
-def clean_df_tracks_invalid_symbols(df: pd.DataFrame) -> pd.DataFrame:
-    return df.apply(clean_row_tracks_invalid_symbols, axis=1)
-
-
 def clean_value_year(value: Any) -> Any:
     if checks.check_year_is_numeric(value) and checks.check_year_range_is_valid(value):
-        return value
+        return int(value)
     else:
         return pd.NA
 
 
 def clean_df_year(df: pd.DataFrame) -> pd.DataFrame:
+    """Replace nulls with empty string; convert to pandas nullable Int32 data type."""
     return df.assign(
-        year=lambda _df: _df["year"].apply(clean_value_year).astype("Int32")
+        year=lambda _df: _df["year"].fillna("").apply(clean_value_year).astype("Int32")
     )
 
 
@@ -130,5 +116,7 @@ def clean_df_title(df: pd.DataFrame) -> pd.DataFrame:
     return df.assign(title=lambda _df: _df["title"].fillna("N/A"))
 
 
-def clean_df_genre(df: pd.DataFrame) -> pd.DataFrame:
-    return df.assign(genre=lambda _df: _df["genre"].fillna(_df["category"]))
+def clean_df_genre_coalesce_with_category(df: pd.DataFrame) -> pd.DataFrame:
+    return df.assign(genre=df["genre"].replace("N/A", pd.NA)).assign(
+        genre=lambda _df: np.where(_df["genre"].isna(), _df["category"], _df["genre"])
+    )

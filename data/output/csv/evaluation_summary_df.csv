@@ -1,12 +1,12 @@
 column,check,counts_before_cleaning,counts_after_cleaning
-artist,Check for *possibly* invalid symbols.,1040,
+artist,Check for *possibly* invalid symbols.,639,
 artist,Check for invalid artist values.,697,
 artist,not_nullable,1,
 category,Check for invalid categories.,89,
 genre,Check for invalid genres.,1,
 genre,not_nullable,3388,
 id,Check that the length of 'id' is 6 characters.,477,
-title,Check for *possibly* invalid symbols.,1200,691.0
+title,Check for *possibly* invalid symbols.,747,497.0
 title,not_nullable,8,
 year,Check if year is numeric.,28,
 year,Check that year is between 1950 and 2030.,56,
