@@ -74,8 +74,17 @@ def clean_df_invalid_categories(df: pd.DataFrame) -> pd.DataFrame:
     )
 
 
-def clean_df_id_zero_padding(df: pd.DataFrame) -> pd.DataFrame:
-    return df.assign(id=lambda _df: _df["id"].apply(lambda s: str(s).zfill(6)))
+def clean_row_id_format(row: Any, ids: list) -> Any:
+    if not checks.check_id_six_digit_starting_one(row["id"]):
+        formatted_id = str(int((row["id"])) + 100000)
+        if formatted_id not in ids:
+            row["id"] = formatted_id
+    return row
+
+
+def clean_df_id_format(df: pd.DataFrame) -> pd.DataFrame:
+    list_of_ids = df["id"].tolist()
+    return df.apply(clean_row_id_format, ids=list_of_ids, axis=1)
 
 
 def clean_row_genre_invalid(row: Any) -> Any:
