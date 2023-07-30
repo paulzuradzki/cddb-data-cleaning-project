@@ -67,6 +67,7 @@ def get_failure_cases_summary_as_formatted_table(
     return formatted_table
 
 
+@typing.no_type_check
 def log_df_change(
     after_df: pd.DataFrame, before_df: pd.DataFrame, operation_label: str
 ) -> pd.DataFrame:
@@ -74,11 +75,12 @@ def log_df_change(
         after_df, result_names=("before", "after")
     )
 
-    comps_df_sample_markdown: Union[str, None] = None
     if not comps_df.empty:
         comps_df_sample_markdown: str = (
             comps_df.sample(5, random_state=0).fillna("").to_markdown()
         )
+    else:
+        comps_df_sample_markdown: Union[str, None] = None
 
     n_rows, _ = comps_df.shape
 
