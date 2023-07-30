@@ -80,7 +80,7 @@ def log_df_change(
             comps_df.sample(5, random_state=0).fillna("").to_markdown()
         )
     else:
-        comps_df_sample_markdown: Union[str, None] = None
+        comps_df_sample_markdown: Union[str, None] = None  # type: ignore[no-redef]
 
     n_rows, _ = comps_df.shape
 
