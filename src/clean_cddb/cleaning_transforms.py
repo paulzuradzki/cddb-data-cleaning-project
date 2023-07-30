@@ -96,23 +96,6 @@ def clean_df_genre_invalid(df: pd.DataFrame) -> pd.DataFrame:
     return df.apply(clean_row_genre_invalid, axis=1)
 
 
-def clean_row_tracks_invalid_symbols(row: Any) -> Any:
-    invalid_symbols = set("Ã¤Â")
-    for s in invalid_symbols:
-        if s in row["tracks"]:
-            row = pd.Series(
-                ["REJECT_ROW - invalid symbol in tracks" for _cell in row],
-                index=row.index,
-            )
-        return row
-    return row
-
-
-@typing.no_type_check
-def clean_df_tracks_invalid_symbols(df: pd.DataFrame) -> pd.DataFrame:
-    return df.apply(clean_row_tracks_invalid_symbols, axis=1)
-
-
 def clean_value_year(value: Any) -> Any:
     if checks.check_year_is_numeric(value) and checks.check_year_range_is_valid(value):
         return value
