@@ -79,11 +79,11 @@ logging.info("Applying cleaning operations...")
 clean_df_before_drops = None
 clean_df = (
     source_df.pipe(clean_cddb.clean_df_standardize_various_artists)
+    .pipe(clean_cddb.clean_df_id_format)
     .pipe(clean_cddb.clean_df_try_to_fix_encoding_errors, "artist")
     .pipe(df_to_var, "clean_df_artist_transforms_only")
     .pipe(clean_cddb.clean_df_invalid_symbols)
     .pipe(clean_cddb.clean_df_invalid_categories)
-    .pipe(clean_cddb.clean_df_id_zero_padding)
     .pipe(clean_cddb.clean_df_genre_invalid)
     .pipe(clean_cddb.clean_df_tracks_invalid_symbols)
     .pipe(clean_cddb.clean_df_year)

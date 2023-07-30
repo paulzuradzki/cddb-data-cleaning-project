@@ -113,3 +113,8 @@ def check_track_has_numeric_prefix(x: Any) -> bool:
         if keyword in x.lower():
             return False
     return True
+
+def check_id_six_digit_starting_one(x: Any) -> bool:
+    if int(x) not in range(100000, 200000):
+        return False
+    return True

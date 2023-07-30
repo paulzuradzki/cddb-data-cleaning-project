@@ -139,7 +139,8 @@ schema = pa.DataFrameSchema(
                     lambda x: len(x) == 6,
                     element_wise=True,
                     name="Check that the length of 'id' is 6 characters.",
-                    description="lambda x: len(x)==6",
+                    description=inspect.getsource(
+                         checks.check_id_six_digit_starting_one),
                 )
             ],
         ),
