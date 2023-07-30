@@ -10,8 +10,8 @@ def check_col_has_valid_characters(x: Any) -> bool:
         return False
 
     invalid_symbols = set(
-        "\^z¤¦©¬®¯°±²³´µ¶¸¹º»¼½¾¿ÀÂÃÄÅÆÇÈÌÕÖÜàâäåçèéïð÷øùû˜ѼҸ€中俊劇四団季雅�"
-    )
+        "\^¤¦©¬®¯°±²³´µ¶¸¹º»¼½¾¿ÂÃÅÆÇÌÕÖÜâåçïð÷øùû˜ѼҸ€中俊劇四団季雅�"
+    )  # noqa
     for char in x:
         if char in invalid_symbols:
             return False
@@ -113,6 +113,7 @@ def check_track_has_numeric_prefix(x: Any) -> bool:
         if keyword in x.lower():
             return False
     return True
+
 
 def check_id_six_digit_starting_one(x: Any) -> bool:
     if int(x) not in range(100000, 200000):

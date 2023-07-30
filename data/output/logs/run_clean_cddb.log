@@ -1,0 +1,159 @@
+2023-07-30 15:15:42,059 - 85748 - INFO - Reading cddb.tsv...
+2023-07-30 15:15:42,121 - 85748 - INFO - Validating source_df...
+2023-07-30 15:15:42,259 - 85748 - INFO - Validation failure. Failure cases detected.
+2023-07-30 15:15:42,259 - 85748 - INFO - Reporting on failure cases for source_df...
+2023-07-30 15:15:42,265 - 85748 - INFO - Applying cleaning operations...
+2023-07-30 15:15:42,284 - 85748 - INFO - Cleaning operation
+operation_label: Cleaning with 'clean_cddb.clean_df_try_to_fix_encoding_errors' procedure
+cleaning operation_label: Cleaning with 'clean_cddb.clean_df_try_to_fix_encoding_errors' procedure
+Number of rows affected: 703
+Columns affected: {'artist'}
+Examples:
+|      | ('artist', 'before')   | ('artist', 'after')   |
+|-----:|:-----------------------|:----------------------|
+| 7375 | Various Artists        | Various               |
+| 6256 | Various Artists        | Various               |
+| 7495 | Various Artists        | Various               |
+| 8171 | Various Artist         | Various               |
+| 7012 | Various Artists        | Various               |
+====================================================================================================
+====================================================================================================
+
+2023-07-30 15:15:42,334 - 85748 - INFO - Cleaning operation
+operation_label: Cleaning with 'clean_cddb.clean_df_try_to_fix_encoding_errors' procedure
+cleaning operation_label: Cleaning with 'clean_cddb.clean_df_try_to_fix_encoding_errors' procedure
+Number of rows affected: 292
+Columns affected: {'artist'}
+Examples:
+|      | ('artist', 'before')   | ('artist', 'after')   |
+|-----:|:-----------------------|:----------------------|
+| 7679 | Noir DÃÆÃÂ©sir                        | Noir Désir            |
+| 9401 | Los CaÃÂ±os                        | Los Caños             |
+| 6998 | Olle LjungstrÃÂ¶m                        | Olle Ljungström       |
+| 4711 | Herbert GrÃÂ¶nemeyer                        | Herbert Grönemeyer    |
+| 3004 | LeÃÂ¦ther Strip                        | Leæther Strip         |
+====================================================================================================
+====================================================================================================
+
+2023-07-30 15:15:42,542 - 85748 - INFO - Cleaning operation
+operation_label: Cleaning with 'clean_cddb.clean_df_invalid_symbols' procedure
+cleaning operation_label: Cleaning with 'clean_cddb.clean_df_invalid_symbols' procedure
+Number of rows affected: 346
+Columns affected: {'genre', 'title', 'merged_values', 'artist', 'id', 'category', 'year', 'tracks'}
+Examples:
+|      | ('artist', 'before')   | ('artist', 'after')         | ('category', 'before')   | ('category', 'after')       | ('genre', 'before')   | ('genre', 'after')          | ('title', 'before')   | ('title', 'after')          | ('tracks', 'before')                                                                                                                                                                                                                                                                                                                                                                                 | ('tracks', 'after')         | ('year', 'before')   | ('year', 'after')           |   ('id', 'before') | ('id', 'after')             | ('merged_values', 'before')   | ('merged_values', 'after')   |
+|-----:|:-----------------------|:----------------------------|:-------------------------|:----------------------------|:----------------------|:----------------------------|:----------------------|:----------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------|:---------------------|:----------------------------|-------------------:|:----------------------------|:------------------------------|:-----------------------------|
+| 9296 | ÃÂ±ÃÂ¨ ÃÂ´ÃÂ«ÃËÃÂ«                        | REJECT_ROW - invalid artist | soundtrack               | REJECT_ROW - invalid artist | Soundtrack            | REJECT_ROW - invalid artist | ÃÂ¹ÃÅÃÂ¼ÃÂºÃÂ°ÃÂ¼ÃÂ¿ÃÂ· ÃÂµÃÂ¿ÃÂ¹ÃÂ°ÃÂ¿ÃÂ¸                       | REJECT_ROW - invalid artist | ÃÂ±ÃÂ¨ ÃÂ´ÃÂ«ÃËÃÂ« / ÃÂ»ÃÂ§ÃÂ¶ÃÂ»Ãâ¡ÃïÃÂ´Ãâ ÃÂ³ÃÂ¯ÃÂ¿ÃÂ¡ | ÃÂ±ÃÂ¨ ÃÂ´ÃÂ«ÃËÃÂ« / ÃÂ½ÃÆÃÂ³ÃÂ´ÃÂ½ÃÆÃÂ½ÃÂº | ÃÂ±ÃÂ¨ ÃÂ´ÃÂ«ÃËÃÂ« / She is ... one | ÃÂ±ÃÂ¨ ÃÂ´ÃÂ«ÃËÃÂ« / ÃÂ¾ÃâÃâ¬ÃÅ¡ÃÂ¼Ãâ ÃÂ¼ÃÂ¼ÃÂ»ÃÂ³ | ÃÂ±ÃÂ¨ ÃÂ¾ÃÂ§ÃËÃÂ± / ÃÂ°ÃÂºÃÆÃÂµÃÂ°ÃÂ¡ÃÂ´Ãâ ÃÂ±ÃÂ¦ | ÃÂ±ÃÂ¨ ÃÂ¾ÃÂ§ÃËÃÂ± / ÃÂ»ÃÂ§ÃÂ¶ÃÂ»Ãâ¬Ãâ¡ Ãâ¬ÃÅ½ÃÂ»ÃÂ§( (Edward Elgar) | ÃÂ±ÃÂ¨ ÃÂ´ÃÂ«ÃËÃÂ« / She is ... two | ÃÂ±ÃÂ¨ ÃÂ´ÃÂ«ÃËÃÂ« / ÃÂ±ÃâÃÂ¸ÃÂ²ÃÂ¼Ãâ Ãâ¬ÃÂ¸ÃÂ·ÃÅ½ | ÃÂ±ÃÂ¨ ÃÂ´ÃÂ«ÃËÃÂ« / ÃÂ¹ÃÅÃÂ¼ÃÂºÃÂ°ÃÂ¼ÃÂ¿ÃÂ· ÃÂµÃÂ¿ÃÂ¹ÃÂ°ÃÂ¿ÃÂ¸ | ÃÂ±ÃÂ¨ ÃÂ´ÃÂ«ÃËÃÂ« / ÃÂ±ÃâºÃÂ¿ÃÂ¡ÃÂ°Ãâ | ÃÂ±ÃÂ¨ ÃÂ´ÃÂ«ÃËÃÂ« / ÃïÃÅ¸ÃÂ¾ÃâÃÂ¼ÃÂ±ÃÂ¿ÃÂ¡ÃÂ¼ÃÂ­ | ÃÂ±ÃÂ¨ ÃÂ¾ÃÂ§ÃËÃÂ± / The tea time | ÃÂ±ÃÂ¨ ÃÂ´ÃÂ«ÃËÃÂ« / ÃÂµÃÂ¿ÃÂ¹ÃÂ°ÃÂºÃÂ´ÃÂ¿ÃÂ¸ | ÃÂ±ÃÂ¨ ÃÂ´ÃÂ«ÃËÃÂ« / ÃÂ»ÃÂ§ÃÂ¶ÃÂ»Ãâ¡ÃïÃÂ´Ãâ ÃÂ³ÃÂ¯ÃÂ¿ÃÂ¡ (without vocal) |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |                                                                                                                                                                                                                                                                                                                                                                                                      | REJECT_ROW - invalid artist | 2000                 | REJECT_ROW - invalid artist |             109743 | REJECT_ROW - invalid artist |                               | REJECT_ROW - invalid artist  |
+| 1549 | ÃÂ¦ÃÂ¸Ã¢â¬Â¦ÃÂ¨ÃÂ²ÃÂ´                        | REJECT_ROW - invalid artist | misc                     | REJECT_ROW - invalid artist | Pop                   | REJECT_ROW - invalid artist | I'll be there         | REJECT_ROW - invalid artist | ___y  1 | ___y  2 | ___y  3 | ___y  4 | ___y  5 | ___y  6 | ___y  7 | ___y  8 | ___y  9 | ___y  10 | ___y  11 | ___y  12 | ___y  13 |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | | REJECT_ROW - invalid artist | 2001                 | REJECT_ROW - invalid artist |             101595 | REJECT_ROW - invalid artist |                               | REJECT_ROW - invalid artist  |
+| 9038 | ÃÂ®eÃÂ¯ÃÂªÃÂ¨ÃÂ                        | REJECT_ROW - invalid artist | soundtrack               | REJECT_ROW - invalid artist |                       | REJECT_ROW - invalid artist | ÃÂ½ÃâÃÂ¨ÃâÃÂ·RÃÂ§ÃÅ¡                       | REJECT_ROW - invalid artist | ÃÂ¬ÃâºÃÂ·ÃÂ­ÃÂ¨ÃÂ«ÃÂ¿E | NOW AND FOREVER | GOODBYE | ÃÂ¬ÃÂ¯ÃÂªÃÂ¡ÃÂ½ÃÂ¹ÃÂ½ÃÂº | ÃÂ·qÃÂ½ÃïÃÂ¯dÃÂ¨B | ÃÂ½ÃâÃÂ¨ÃâÃÂ·RÃÂ§ÃÅ¡ | ÃÂ¦nÃÂ¤kÃÂ«Ãâ | ÃÂ¬ÃÂ°ÃÂ§AÃÂ¸UÃÂ·ÃÂ³ | ÃÂ·RÃÂ¤ÃÂ£ÃÂ·R | ÃÂ¼ÃÂ´ÃÂ°w | ÃÂ³ÃÅÃÂ¦nÃÂ®Ãâ°ÃÂ¥ÃÂº |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |                                                                                                                                                                                                                                                                                                                                                                                                      | REJECT_ROW - invalid artist |                      | REJECT_ROW - invalid artist |             109480 | REJECT_ROW - invalid artist |                               | REJECT_ROW - invalid artist  |
+| 4592 | ÃÂ¥ÃÂ®Ã¢â¬Â°ÃÂ¨ÃÂ¥ÃÂ¿ÃÂ£?ÃÂ²ÃÂ£Ã¢â¬Å¡?ÃÂ£?Ã¢â¬Å                        | REJECT_ROW - invalid artist | rock                     | REJECT_ROW - invalid artist | JPop                  | REJECT_ROW - invalid artist | True Love             | REJECT_ROW - invalid artist | True Love  EUROBEAT Ver. | Reality>Eternity  EUROBEAT Ver. | True Love  DISCO Ver. | Reality>Eternity  DISCO Ver. | True Love  J-POP Ver. | Reality>Eternity  J-POP Ver. | True Love  EUROBEAT Ver. ÃÂ¯ÃÂ¼Ãâ KARAOKEÃÂ¯ÃÂ¼Ã¢â¬Â° | Reality>Eternity  EUROBEAT Ver. ÃÂ¯ÃÂ¼Ãâ KARAOKEÃÂ¯ÃÂ¼Ã¢â¬Â° | True Love  DISCO Ver. ÃÂ¯ÃÂ¼Ãâ KARAOKEÃÂ¯ÃÂ¼Ã¢â¬Â° | Reality>Eternity  DISCO Ver. ÃÂ¯ÃÂ¼Ãâ KARAOKEÃÂ¯ÃÂ¼Ã¢â¬Â° | True Love  J-POP Ver. ÃÂ¯ÃÂ¼Ãâ KARAOKEÃÂ¯ÃÂ¼Ã¢â¬Â° | Reality>Eternity  J-POP Ver. ÃÂ¯ÃÂ¼Ãâ KARAOKEÃÂ¯ÃÂ¼Ã¢â¬Â° |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |                                                                                                                                                                                                                                                                                                                                                                                                      | REJECT_ROW - invalid artist | 2000                 | REJECT_ROW - invalid artist |             104751 | REJECT_ROW - invalid artist |                               | REJECT_ROW - invalid artist  |
+|   47 | ÃÂ¥ÃÂ±ÃÂ±ÃÂ¥ÃÂ´ÃÂ½ÃÂ£?ÃÂ¾ÃÂ£?Ã¢â¬Â¢ÃÂ£Ã¢â¬Å¡Ãâ ÃÂ£?Ã¢â¬â                        | REJECT_ROW - invalid artist | data                     | REJECT_ROW - invalid artist | JPop                  | REJECT_ROW - invalid artist | HOME                  | REJECT_ROW - invalid artist | Fat Mama | ÃÂ£Ã¢â¬Å¡ÃÂ¢ÃÂ£ÃâÃ¢â¬Â°ÃÂ£ÃâÃÂ¬ÃÂ£ÃâÃÂ ÃÂ£ÃâÃÂªÃÂ£ÃâÃÂ³ | ÃÂ£Ã¢â¬Å¡ÃÂ»ÃÂ£ÃâÃÂ­ÃÂ£ÃâÃÂª | ÃÂ£ÃâÃ¢âÂ¢ÃÂ£ÃâÃÂ³ÃÂ£Ã¢â¬Å¡ÃÂ¸ÃÂ£ÃâÃÂ£ÃÂ£ÃâÃÂ¸ÃÂ£ÃâÃÂ³ | ÃÂ£Ã¢â¬Å¡ÃÂ¹ÃÂ£Ã¢â¬Å¡ÃÂ¯ÃÂ£ÃâÃÂªÃÂ£ÃâÃÂ¼ÃÂ£ÃâÃÂ¸ÃÂ£ÃâÃÂ³'97 | ÃÂ¥??ÃÂ¥Ã¢â¬Â°?ÃÂ£?ÃÂ®ÃÂ£?ÃÂªÃÂ£?Ã¢â¬Å¾ÃÂ©ÃÂ³ÃÂ¥ | ÃÂ£Ã¢â¬Å¡ÃÂ³ÃÂ£ÃâÃÂ¡ÃÂ£ÃâÃÂ«ÃÂ£ÃâÃ¢â¬Â¹ÃÂ£Ã¢â¬Å¡ÃÂ¯ÃÂ£Ã¢â¬Å¡ÃÂ¹ÃÂ£?ÃÂ®ÃÂ¥?ÃÂµ | ÃÂ¥ÃâÃ¢â¬Â¢ÃÂ£Ã¢â¬Å¡Ã¢â¬Â°ÃÂ£?ÃÂ®ÃÂ§Ã¢â¬Â¦ÃÂ©ÃÂ¦Ã¢â¬Å¡ÃÂ© | ÃÂ¦ÃÅÃÂ¼ÃÂ¤ÃÂ¼Ã¢â¬ËÃÂ£?ÃÂ¿ | One more time,One more chance | ÃÂ£ÃâÃÂ¤ÃÂ£Ã¢â¬Å¡ÃÂµÃÂ§Ã¢â¬ïÃÂ·ÃÂ£?ÃÂ®ÃÂ¥ÃÂ¤ÃÂ¢ | HOME |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |                                                                                                                                                                                                                                                                                                                                                                                                      | REJECT_ROW - invalid artist | 1997                 | REJECT_ROW - invalid artist |             100051 | REJECT_ROW - invalid artist |                               | REJECT_ROW - invalid artist  |
+====================================================================================================
+====================================================================================================
+
+2023-07-30 15:15:42,555 - 85748 - INFO - Cleaning operation
+operation_label: Cleaning with 'clean_cddb.clean_df_invalid_categories' procedure
+cleaning operation_label: Cleaning with 'clean_cddb.clean_df_invalid_categories' procedure
+Number of rows affected: 420
+Columns affected: {'category'}
+Examples:
+|      | ('category', 'before')      | ('category', 'after')   |
+|-----:|:----------------------------|:------------------------|
+| 1688 | REJECT_ROW - invalid artist | N/A                     |
+| 8031 | REJECT_ROW - invalid artist | N/A                     |
+|   22 | data                        | N/A                     |
+|  685 | REJECT_ROW - invalid artist | N/A                     |
+| 1963 | REJECT_ROW - invalid artist | N/A                     |
+====================================================================================================
+====================================================================================================
+
+2023-07-30 15:15:42,565 - 85748 - INFO - Cleaning operation
+operation_label: Cleaning with 'clean_cddb.clean_df_id_zero_padding' procedure
+cleaning operation_label: Cleaning with 'clean_cddb.clean_df_id_zero_padding' procedure
+Number of rows affected: 461
+Columns affected: {'id'}
+Examples:
+|      |   ('id', 'before') |   ('id', 'after') |
+|-----:|-------------------:|------------------:|
+| 9631 |               8063 |            008063 |
+| 9452 |               5025 |            005025 |
+| 9432 |               4631 |            004631 |
+| 9373 |               3125 |            003125 |
+| 9661 |               8445 |            008445 |
+====================================================================================================
+====================================================================================================
+
+2023-07-30 15:15:42,765 - 85748 - INFO - Cleaning operation
+operation_label: Cleaning with 'clean_cddb.clean_df_genre_invalid' procedure
+cleaning operation_label: Cleaning with 'clean_cddb.clean_df_genre_invalid' procedure
+Number of rows affected: 3338
+Columns affected: {'genre', 'title', 'merged_values', 'artist', 'id', 'category', 'year', 'tracks'}
+Examples:
+|      | ('artist', 'before')   | ('artist', 'after')   | ('category', 'before')   | ('category', 'after')   | ('genre', 'before')   | ('genre', 'after')   | ('title', 'before')   | ('title', 'after')   | ('tracks', 'before')   | ('tracks', 'after')   | ('year', 'before')   | ('year', 'after')   | ('id', 'before')   | ('id', 'after')   | ('merged_values', 'before')   | ('merged_values', 'after')   |
+|-----:|:-----------------------|:----------------------|:-------------------------|:------------------------|:----------------------|:---------------------|:----------------------|:---------------------|:-----------------------|:----------------------|:---------------------|:--------------------|:-------------------|:------------------|:------------------------------|:-----------------------------|
+| 6741 |                        |                       |                          |                         |                       | N/A                  |                       |                      |                        |                       |                      |                     |                    |                   |                               |                              |
+| 1683 |                        |                       |                          |                         |                       | N/A                  |                       |                      |                        |                       |                      |                     |                    |                   |                               |                              |
+| 2982 |                        |                       |                          |                         |                       | N/A                  |                       |                      |                        |                       |                      |                     |                    |                   |                               |                              |
+| 3537 |                        |                       |                          |                         |                       | N/A                  |                       |                      |                        |                       |                      |                     |                    |                   |                               |                              |
+| 5257 |                        |                       |                          |                         |                       | N/A                  |                       |                      |                        |                       |                      |                     |                    |                   |                               |                              |
+====================================================================================================
+====================================================================================================
+
+2023-07-30 15:15:42,806 - 85748 - INFO - Cleaning operation
+operation_label: Cleaning with 'clean_cddb.clean_df_year' procedure
+cleaning operation_label: Cleaning with 'clean_cddb.clean_df_year' procedure
+Number of rows affected: 5353
+Columns affected: {'year'}
+Examples:
+|      |   ('year', 'before') |   ('year', 'after') |
+|-----:|---------------------:|--------------------:|
+|  824 |                 1999 |                1999 |
+| 9035 |                 2003 |                2003 |
+| 9425 |                 1997 |                1997 |
+| 3242 |                 1998 |                1998 |
+| 2841 |                 2000 |                2000 |
+====================================================================================================
+====================================================================================================
+
+2023-07-30 15:15:42,839 - 85748 - INFO - Cleaning operation
+operation_label: Cleaning with 'clean_cddb.clean_df_title' procedure
+cleaning operation_label: Cleaning with 'clean_cddb.clean_df_title' procedure
+Number of rows affected: 8
+Columns affected: {'title'}
+Examples:
+|      | ('title', 'before')   | ('title', 'after')   |
+|-----:|:----------------------|:---------------------|
+| 6093 |                       | N/A                  |
+| 1255 |                       | N/A                  |
+|  634 |                       | N/A                  |
+| 7705 |                       | N/A                  |
+| 2662 |                       | N/A                  |
+====================================================================================================
+====================================================================================================
+
+2023-07-30 15:15:42,873 - 85748 - INFO - Cleaning operation
+operation_label: Cleaning with 'clean_cddb.clean_df_genre_coalesce_with_category' procedure
+cleaning operation_label: Cleaning with 'clean_cddb.clean_df_genre_coalesce_with_category' procedure
+Number of rows affected: 3306
+Columns affected: {'genre'}
+Examples:
+|      | ('genre', 'before')   | ('genre', 'after')   |
+|-----:|:----------------------|:---------------------|
+| 1828 | N/A                   | misc                 |
+|  179 | N/A                   | folk                 |
+| 6395 | N/A                   | rock                 |
+| 6331 | N/A                   | rock                 |
+| 5194 | N/A                   | rock                 |
+====================================================================================================
+====================================================================================================
+
+2023-07-30 15:15:42,876 - 85748 - INFO - Validating clean_df...
+2023-07-30 15:15:42,944 - 85748 - INFO - Validation failure. Failure cases detected.
+2023-07-30 15:15:42,944 - 85748 - INFO - Reporting on failure cases for clean_df...
+2023-07-30 15:15:42,945 - 85748 - INFO - Creating evaluation summary of before-vs-after cleaning...
+2023-07-30 15:15:42,946 - 85748 - INFO - Creating detailed row-level comps of before-vs-after cleaning...
+2023-07-30 15:15:43,878 - 85748 - INFO - Exporting data sets...
+2023-07-30 15:15:43,878 - 85748 - INFO - Output directory: ./data/output/
+2023-07-30 15:15:44,616 - 85748 - INFO - Wrote: ./data/output/before_cleaning_failure_cases_summary_table.txt
+2023-07-30 15:15:44,617 - 85748 - INFO - Created SQL tables and CSVs for to following dataframes:
+['source_df', 'before_cleaning_failure_cases_df', 'before_cleaning_failure_cases_summary', 'clean_df', 'after_cleaning_failure_cases_df', 'after_cleaning_failure_cases_summary', 'evaluation_summary_df', 'comps_df', 'comps_df_formatted', 'track_level_df']

@@ -17,6 +17,7 @@ import clean_cddb
 from clean_cddb.utils import (
     get_check_func_descriptions,
     get_failure_cases_summary_as_formatted_table,
+    log_df_change,
 )
 
 
@@ -29,9 +30,15 @@ pd.set_option("display.max_rows", 1000)
 pd.set_option("display.max_columns", None)
 pd.set_option("display.max_colwidth", None)
 
+# Setup logging
+log_out_path = "./data/output/logs"
+Path(log_out_path).mkdir(exist_ok=True)
+module_name = Path(__file__).name.replace(".py", "")
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(process)d - %(levelname)s - %(message)s",
+    filename=f"{log_out_path}/{module_name}.log",
+    filemode="w",
 )
 
 #######################
@@ -40,7 +47,7 @@ logging.basicConfig(
 
 logging.info("Reading cddb.tsv...")
 filepath = "./data/input/cddb.tsv"
-source_df = pd.read_csv(filepath, sep="\t", dtype="str")
+source_df = pd.read_csv(filepath, sep="\t", dtype="str", encoding="latin1")
 
 #######################
 # Validation: source_df
@@ -75,20 +82,75 @@ before_cleaning_failure_cases_summary_table = (
 # Cleaning
 #######################
 
+clean_df_before_drops = pd.DataFrame()
+_df_before = pd.DataFrame()
+
 logging.info("Applying cleaning operations...")
-clean_df_before_drops = None
+
 clean_df = (
-    source_df.pipe(clean_cddb.clean_df_standardize_various_artists)
-    .pipe(clean_cddb.clean_df_id_format)
+    source_df.pipe(df_to_var, "_df_before")
+    .pipe(clean_cddb.clean_df_standardize_various_artists)
+    .pipe(
+        log_df_change,
+        before_df=_df_before,
+        operation_label="Cleaning with 'clean_cddb.clean_df_try_to_fix_encoding_errors' procedure",  # noqa
+    )
+    .pipe(df_to_var, "_df_before")
     .pipe(clean_cddb.clean_df_try_to_fix_encoding_errors, "artist")
-    .pipe(df_to_var, "clean_df_artist_transforms_only")
+    .pipe(
+        log_df_change,
+        before_df=_df_before,
+        operation_label="Cleaning with 'clean_cddb.clean_df_try_to_fix_encoding_errors' procedure",  # noqa
+    )
+    .pipe(df_to_var, "_df_before")
     .pipe(clean_cddb.clean_df_invalid_symbols)
+    .pipe(
+        log_df_change,
+        before_df=_df_before,
+        operation_label="Cleaning with 'clean_cddb.clean_df_invalid_symbols' procedure",
+    )
+    .pipe(df_to_var, "_df_before")
     .pipe(clean_cddb.clean_df_invalid_categories)
+    .pipe(
+        log_df_change,
+        before_df=_df_before,
+        operation_label="Cleaning with 'clean_cddb.clean_df_invalid_categories' procedure",  # noqa
+    )
+    .pipe(df_to_var, "_df_before")
+    .pipe(clean_cddb.clean_df_id_zero_padding)
+    .pipe(
+        log_df_change,
+        before_df=_df_before,
+        operation_label="Cleaning with 'clean_cddb.clean_df_id_zero_padding' procedure",
+    )
+    .pipe(df_to_var, "_df_before")
     .pipe(clean_cddb.clean_df_genre_invalid)
-    .pipe(clean_cddb.clean_df_tracks_invalid_symbols)
+    .pipe(
+        log_df_change,
+        before_df=_df_before,
+        operation_label="Cleaning with 'clean_cddb.clean_df_genre_invalid' procedure",
+    )
+    .pipe(df_to_var, "_df_before")
     .pipe(clean_cddb.clean_df_year)
+    .pipe(
+        log_df_change,
+        before_df=_df_before,
+        operation_label="Cleaning with 'clean_cddb.clean_df_year' procedure",
+    )
+    .pipe(df_to_var, "_df_before")
     .pipe(clean_cddb.clean_df_title)
-    .pipe(clean_cddb.clean_df_genre)
+    .pipe(
+        log_df_change,
+        before_df=_df_before,
+        operation_label="Cleaning with 'clean_cddb.clean_df_title' procedure",
+    )
+    .pipe(df_to_var, "_df_before")
+    .pipe(clean_cddb.clean_df_genre_coalesce_with_category)
+    .pipe(
+        log_df_change,
+        before_df=_df_before,
+        operation_label="Cleaning with 'clean_cddb.clean_df_genre_coalesce_with_category' procedure",  # noqa
+    )
     # Save an intermediate dataframe prior to dropping records
     # so we can compare with source_df later
     .pipe(df_to_var, "clean_df_before_drops")
